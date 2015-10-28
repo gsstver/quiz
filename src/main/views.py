@@ -19,6 +19,7 @@ class PassTestView(UpdateView):
         for question in instance.questions.all():
             fields[str(question.pk)] = forms.ChoiceField(
                 widget=forms.RadioSelect,
+                label=question.text,
                 choices=[(answer.weight, answer.title) for answer in question.answers.all()])
         return type('TestPassFormClass', (forms.Form,), fields)
 
