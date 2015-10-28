@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}/bootstrap/css/bootstrap.min.css">
+    <script src="{{ STATIC_URL }}/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <ul class="nav nav-pills">
+        <li role="presentation"><a href="{% url 'main:test-list' %}">Главная / список тестов</a></li>
+    </ul>
+
+    <div class="row">
+        <div class="col-xs-12">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

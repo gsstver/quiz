@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Test, Question, Answer
+from .models import Test, Question, Answer, UserTestResult
 
 
 class QuestionInline(admin.TabularInline):
@@ -27,4 +27,6 @@ admin.site.register(Test, TestAdmin)
 admin.site.register(Question, QuestionAdmin)
 
 admin.site.register(Answer)
+
+admin.site.register(UserTestResult)
 

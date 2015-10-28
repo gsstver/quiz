@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+    {% for test in object_list %}
+        <div style="margin-bottom: 20px">
+            {{ test.name }} <a class="btn btn-success btn-xs" href="{% url 'main:test-pass' test.pk %}">Пройти тест</a><br>
+            {{ test.description }}
+        </div>
+    {% endfor %}
+
+{% endblock %}

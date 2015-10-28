@@ -1,3 +1,5 @@
+from jsonfield import JSONField
+from django.conf import settings
 from django.db import models
 
 
@@ -25,3 +27,13 @@ class Answer(models.Model):
 
     def __str__(self):
         return '{0} / {1} / {2}'.format(self.question, self.title, self.weight)
+
+
+class UserTestResult(models.Model):
+    test = models.ForeignKey('Test', related_name='results')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='results')
+    datetime = models.DateField(auto_now_add=True)
+    data = JSONField()
+
+    def __str__(self):
+        return '{user} / {time} / {test}'.format(user=self.user, time=self.datetime, test=self.test)
