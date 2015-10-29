@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Тест</th>
+            <th>Max</th>
+            <th>Набрали</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in object_list %}
+            <tr>
+                <td>{{ result.test }}</td>
+                <td>{{ result.data.max }}</td>
+                <td>{{ result.data.users }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

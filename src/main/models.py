@@ -10,6 +10,13 @@ class Test(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def get_max_weight(self):
+        result = 0
+        for question in self.questions.all():
+            result += question.get_max_weight
+        return result
+
 
 class Question(models.Model):
     test = models.ForeignKey('Test', related_name='questions')
@@ -18,6 +25,10 @@ class Question(models.Model):
 
     def __str__(self):
         return '{0} / {1}'.format(self.test, self.text)
+
+    @property
+    def get_max_weight(self):
+        return self.answers.all().aggregate(models.Max('weight'))['weight__max']
 
 
 class Answer(models.Model):
@@ -37,3 +48,7 @@ class UserTestResult(models.Model):
 
     def __str__(self):
         return '{user} / {time} / {test}'.format(user=self.user, time=self.datetime, test=self.test)
+
+    def get_result_weight(self):
+        print(self.data)
+        return None

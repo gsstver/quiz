@@ -1,7 +1,7 @@
-from vanilla import UpdateView
+from vanilla import UpdateView, ListView
 from django import forms
 from django.http import HttpResponseRedirect
-from .models import Test
+from .models import Test, UserTestResult
 
 
 class PassTestView(UpdateView):
@@ -24,9 +24,22 @@ class PassTestView(UpdateView):
         return type('TestPassFormClass', (forms.Form,), fields)
 
     def form_valid(self, form):
+        user_weight = 0
+        for key in form.cleaned_data.keys():
+            user_weight += int(form.cleaned_data[key])
         self.request.user.results.create(
             test=self.object,
-            data=form.cleaned_data
+            data={
+                'max': self.object.get_max_weight,
+                'users': user_weight,
+                'data': form.cleaned_data
+            }
         )
         return HttpResponseRedirect('/')
 
+
+class UserTestResultListView(ListView):
+    model = UserTestResult
+
+    def get_queryset(self):
+        return self.request.user.results.all()
