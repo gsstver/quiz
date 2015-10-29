@@ -3,11 +3,26 @@
 
 {% block content %}
 
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Вопросов</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
     {% for test in object_list %}
-        <div style="margin-bottom: 20px">
-            {{ test.name }} <a class="btn btn-success btn-xs" href="{% url 'main:test-pass' test.pk %}">Пройти тест</a><br>
-            {{ test.description }}
-        </div>
-    {% endfor %}
 
+            <tr>
+                <td>{{ test.name }} </td>
+                <td>{{ test.description }}</td>
+                <td> <span class="badge">42</span></td>
+             <td><a class="btn btn-success btn-xs" href="{% url 'main:test-pass' test.pk %}">Пройти тест</a></td>
+            </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
