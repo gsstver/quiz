@@ -3,9 +3,9 @@
 {% block content %}
 
     <form method="post">{% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
+        <div>
+            {{ form.as_p}}
+        </div>
         <button type="submit" class="btn btn-success">Проверить</button>
     </form>
 
